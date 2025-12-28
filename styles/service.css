@@ -172,7 +172,8 @@
     align-items: center;
     justify-content: center;
     gap: 1.4rem;
-    margin-left: 7px;
+    margin-left: 3px;
+    Width: 100%;
 }
 .linkwrap i{
     font-size: 12px;
@@ -713,5 +714,6 @@
 /**styles for all inputs**/
 /**styles for all inputs**/
 /**styles for all inputs**/
+
 
 } /*END OF DESKTOP SCREEN SIZES*/
