@@ -103,6 +103,7 @@
 
 .mainlef h1, h2 {
     color:  aquamarine;
+    font-size: 10vw;
 }
 .contents h2{
     margin: 50px 0 0 0;
@@ -295,6 +296,7 @@
     display: flex;
     color: #f9f9f9;
     margin-top: 20px;
+    margin-left: 2px;
 
 }
 .help a{
@@ -668,4 +670,5 @@ body{
 
 }
 /**END OF SCREEN SIZE STYLES**/
+
 
