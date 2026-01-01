@@ -83,7 +83,7 @@
     text-align: center;
 }
 .mainto h4{
-    font-size: large;
+    font-size: x-large;
 }
 .mainto p, .maindo p{
     margin:  20px;
@@ -323,7 +323,7 @@
     display: flex;
     color: #f9f9f9;
     margin-top: 20px;
-    margin-left: 3%;
+    margin-left: 0%;
     align-items: center;
 }
 .help a{
@@ -717,5 +717,6 @@
 
 
 } /*END OF DESKTOP SCREEN SIZES*/
+
 
 
