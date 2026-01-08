@@ -263,7 +263,7 @@
                 <a href="https://wa.me/+233554678732"><i class="fa-brands fa-whatsapp"></i></a>
                 <a href="https://www.facebook.com/profile.php?id=100092258583707&mibextid=ZbWKwL"><i class="fa-brands fa-facebook"></i></a>
                 <a href="https://www.tiktok.com/@prime_graphix_media"><i class="fa-brands fa-tiktok"></i></a>
-                <a href="https://github.com/samuelimoro4-web"><i class="fa-brands fa-github"></i></a>
+                <a href="https://github.com"><i class="fa-brands fa-github"></i></a>
             </div>
             <div class="ft">
                 MobiTech - 2025
@@ -271,82 +271,79 @@
         </div>
     </div>
 
-<script src="">
-
-  async function generatePDF() {
+<script>
+    async function generatePDF() {
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
+    
     // 1. Get Form Values
     const company = document.getElementById('company').value;
     const email = document.getElementById('email').value;
     const tel = document.getElementById('tel').value;
-    const package = document.getElementById('package').value;
-    const header = document.getElementById('header').value;
-    const file = document.getElementById('file').value;
-    const details = document.getElementById('details').value;
+    const packageType = document.getElementById('package').value;
+    const headerText = document.getElementById('header').value;
+    const detailsText = document.getElementById('details').value;
+    
+    // Proper way to get filename 
+    const fileInput = document.getElementById('file');
+    const fileName = fileInput.files.length > 0 ? fileInput.files[0].name : "No file attached";
+
     if (!company || !email) {
        alert("Please fill in the Company and Email fields first!");
        return;
     }
 
-    // 2. Add Branding
+    // 2. Branding
     doc.setFont("helvetica", "bold");
     doc.setFontSize(22);
-    doc.setTextColor(10, 36, 99); // ImoDev Navy Blue
+    doc.setTextColor(10, 36, 99); 
     doc.text("IMODEV AD SUBMISSION", 20, 30);
 
-    // 3. Add Content
+    // 3. Content with Incremental Y-Spacing
     doc.setFontSize(12);
     doc.setTextColor(0, 0, 0);
     doc.text(`Date: ${new Date().toLocaleDateString()}`, 20, 40);
-    doc.line(20, 45, 190, 45); // Horizontal Line
+    doc.line(20, 45, 190, 45);
 
-    doc.setFont("helvetica", "bold");
-    doc.text("Company:", 20, 60);
-    doc.setFont("helvetica", "normal");
-    doc.text(company, 60, 60);
+    let currentY = 60; // Start position for data
+    const lineSpacing = 10;
 
-    doc.setFont("helvetica", "bold");
-    doc.text("Email:", 20, 70);
-    doc.setFont("helvetica", "normal");
-    doc.text(email, 60, 70);
-      
-    doc.setFont("helvetica", "bold");
-    doc.text("tel:", 20, 70);
-    doc.setFont("helvetica", "normal");
-    doc.text(tel, 60, 70);
+    const addField = (label, value) => {
+        doc.setFont("helvetica", "bold");
+        doc.text(`${label}:`, 20, currentY);
+        doc.setFont("helvetica", "normal");
+        doc.text(String(value), 60, currentY);
+        currentY += lineSpacing;
+    };
 
-    doc.setFont("helvetica", "bold");
-    doc.text("Package:", 20, 80);
-    doc.setFont("helvetica", "normal");
-    doc.text(package, 60, 80);
-  
-    doc.setFont("helvetica", "bold");
-    doc.text("header:", 40, 95);
-    doc.setFont("helvetica", "normal");
-    // Handles text wrapping for the header
-    const splitHeader = doc.splitTextToSize(header, 160);
-    doc.text(splitHeader, 20, 105);
-    
-    doc.setFont("helvetica", "bold");
-    doc.text("file:", 20, 60);
-    doc.setFont("helvetica", "normal");
-    doc.text(file, 60, 60);
+    addField("Company", company);
+    addField("Email", email);
+    addField("Telephone", tel);
+    addField("Package", packageType);
+    addField("File", fileName);
 
-    doc.setFont("helvetica", "bold");
-    doc.text("Details:", 20, 95);
-    doc.setFont("helvetica", "normal");
-    // Handles text wrapping for the description
-    const splitDetails = doc.splitTextToSize(details, 160);
-    doc.text(splitDetails, 20, 105);
+    // Wrapping Text Sections
+    const addWrappedSection = (label, text) => {
+        currentY += 5; // Extra padding
+        doc.setFont("helvetica", "bold");
+        doc.text(`${label}:`, 20, currentY);
+        currentY += 7;
+        doc.setFont("helvetica", "normal");
+        const splitText = doc.splitTextToSize(text, 170);
+        doc.text(splitText, 20, currentY);
+        currentY += (splitText.length * 7) + 5;
+    };
+
+    addWrappedSection("Header", headerText);
+    addWrappedSection("Details", detailsText);
 
     // 4. Footer
     doc.setFontSize(10);
     doc.setTextColor(150);
-    doc.text("Thank you for choosing ImoDev Digital Systems.", 20, 280);
+    doc.text("Thank you for choosing ImoDev Digital Systems.", 20, 285);
 
     // 5. Download
-    doc.save(`ImoDev_Ad_Receipt_${company}.pdf`);
+    doc.save(`ImoDev_Ad_Receipt_${company.replace(/\s+/g, '_')}.pdf`);
 }
 </script> 
 
