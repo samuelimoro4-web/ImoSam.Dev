@@ -9,7 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="styles/ads.css">
     <!-- Load the PDF library -->
-    <script src="cdnjs.cloudflare.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
   <style>
 
   </style>
@@ -55,10 +56,10 @@
 
  <div class="ads-card" id="ads">
          <h1>Ad Placement Form</h1>
-         <p>Fill out the details below. Click "Download PDF" for your records before submitting.</p>
+         <p>Fill out the details below.</p>
 
  <!-- Replace {your_form_id} with your actual Formspree ID -->
- <form id="adsForm" action="https://formspree.io/f/mwvpgozj " method="POST">
+ <form id="adsForm" action="https://formspree.io/f/mwvpgozj " method="POST" enctype="multipart/form-data">
             <div class="input-group">
                 <label>Company Name</label>
                 <input type="text" id="company" name="company" required>
@@ -91,7 +92,7 @@
                      <i id="upload-icon" class="fas fa-image"></i>
                     Add Image
                 </label>
-                <input type="file" id="file-inputs" name="file" accept="image/" required placeholder="Add image for your ads">
+                <input type="file" id="file-inputs" name="file" accept="image/*" required placeholder="Add image for your ads">
             </div>
             
             <div id="preview-container"></div>
@@ -146,11 +147,7 @@
       <div class="spacer"></div>
       
       <h2>Top Brands</h2>
-        <div class="scroll-container">
-            <div class="scrolls">
-                <img src="images/"></span>
-                <h3>SikaLife guide Lite</h3>
-            </div>
+        <div class="scroll-container">     
             <div class="scrolls">
                 <img src="images/cldf.png"></span>
                 <h3>Cloudflare</h3>
@@ -273,10 +270,11 @@
 
 <script>
     async function generatePDF() {
+    // 1. Correct Initialization for 2026 UMD version
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
     
-    // 1. Get Form Values
+    // 2. Get Form Values (Updated IDs to match your HTML)
     const company = document.getElementById('company').value;
     const email = document.getElementById('email').value;
     const tel = document.getElementById('tel').value;
@@ -284,8 +282,8 @@
     const headerText = document.getElementById('header').value;
     const detailsText = document.getElementById('details').value;
     
-    // Proper way to get filename 
-    const fileInput = document.getElementById('file');
+    // Match the ID "file-inputs" from your HTML
+    const fileInput = document.getElementById('file-inputs');
     const fileName = fileInput.files.length > 0 ? fileInput.files[0].name : "No file attached";
 
     if (!company || !email) {
@@ -293,21 +291,21 @@
        return;
     }
 
-    // 2. Branding
+    // 3. Branding & Styling
     doc.setFont("helvetica", "bold");
     doc.setFontSize(22);
     doc.setTextColor(10, 36, 99); 
     doc.text("IMODEV AD SUBMISSION", 20, 30);
 
-    // 3. Content with Incremental Y-Spacing
     doc.setFontSize(12);
     doc.setTextColor(0, 0, 0);
     doc.text(`Date: ${new Date().toLocaleDateString()}`, 20, 40);
     doc.line(20, 45, 190, 45);
 
-    let currentY = 60; // Start position for data
+    let currentY = 60; 
     const lineSpacing = 10;
 
+    // Helper to add standard fields
     const addField = (label, value) => {
         doc.setFont("helvetica", "bold");
         doc.text(`${label}:`, 20, currentY);
@@ -320,11 +318,11 @@
     addField("Email", email);
     addField("Telephone", tel);
     addField("Package", packageType);
-    addField("File", fileName);
+    addField("File Name", fileName);
 
-    // Wrapping Text Sections
+    // Helper to add wrapped text (for long descriptions)
     const addWrappedSection = (label, text) => {
-        currentY += 5; // Extra padding
+        currentY += 5; 
         doc.setFont("helvetica", "bold");
         doc.text(`${label}:`, 20, currentY);
         currentY += 7;
@@ -334,18 +332,19 @@
         currentY += (splitText.length * 7) + 5;
     };
 
-    addWrappedSection("Header", headerText);
-    addWrappedSection("Details", detailsText);
+    addWrappedSection("Ad Header", headerText);
+    addWrappedSection("Ad Description", detailsText);
 
     // 4. Footer
     doc.setFontSize(10);
     doc.setTextColor(150);
     doc.text("Thank you for choosing ImoDev Digital Systems.", 20, 285);
 
-    // 5. Download
-    doc.save(`ImoDev_Ad_Receipt_${company.replace(/\s+/g, '_')}.pdf`);
-}
-</script> 
+    // 5. Download with cleaned filename
+    const safeName = company.replace(/[^a-z0-9]/gi, '_');
+    doc.save(`ImoDev_Receipt_${safeName}.pdf`);
+} 
+</script>
 
 <script>
     ///PREVIEW CODES
