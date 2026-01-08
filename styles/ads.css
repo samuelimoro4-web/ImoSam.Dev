@@ -474,7 +474,7 @@ button[type="submit"]:hover {
 
 
 /*DESKTOP SCREEN SIZE STYLES**/
-@media(min-width: 768px) and (max-width: 1080px) {
+@media(min-width: 768px) {
 /* ABOUT STYLES**/
 /* HEADER STYLES**/
 .header{
@@ -876,4 +876,5 @@ width: fit-content;
 
 
 } /**END OF CSS SCREEN SIZE CODES**/
+
 
