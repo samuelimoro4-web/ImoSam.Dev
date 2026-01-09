@@ -57,10 +57,10 @@
 
  <div class="ads-card" id="ads">
          <h1>Ad Placement Form</h1>
-         <p>Fill out the details below.</p>
+         <p>Fill out the details below. Click on "Download PDF" before submitting your forms.</p>
 
  <!-- Replace {your_form_id} with your actual Formspree ID -->
- <form id="adsForm" action="https://formspree.io/f/mwvpgozj " method="POST" enctype="multipart/form-data">
+ <form id="adsForm" action="https://formspree.io/f/mwvpgozj " method="POST">
             <div class="input-group">
                 <label>Company Name</label>
                 <input type="text" id="company" name="company" required>
@@ -93,7 +93,7 @@
                      <i id="upload-icon" class="fas fa-image"></i>
                     Add Image
                 </label>
-                <input type="file" id="file-inputs" name="file" accept="image/" required placeholder="Add image for your ads">
+            <!-- <input type="file" id="file-inputs" name="file" accept="image/*" required placeholder="Add image for your ads"> --->
             </div>
             
             <div id="preview-container"></div>
@@ -275,7 +275,7 @@
     const { jsPDF } = window.jspdf;
     const doc = new jsPDF();
     
-    // 2. Get Form Values (Updated IDs to match your HTML)
+    // 2. Get Form Values (Updated IDs to match HTML)
     const company = document.getElementById('company').value;
     const email = document.getElementById('email').value;
     const tel = document.getElementById('tel').value;
@@ -283,7 +283,7 @@
     const headerText = document.getElementById('header').value;
     const detailsText = document.getElementById('details').value;
     
-    // Match the ID "file-inputs" from your HTML
+    // Match the ID "file-inputs" from HTML
     const fileInput = document.getElementById('file-inputs');
     const fileName = fileInput.files.length > 0 ? fileInput.files[0].name : "No file attached";
 
