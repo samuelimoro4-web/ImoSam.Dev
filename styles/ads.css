@@ -225,9 +225,11 @@ button[type="submit"]:hover {
 }
 .btn-secondary{
     border: none;
-    margin-top: 20px;
+    margin-bottom: 20px;
     padding: 20px;
     border-radius: 16px;
+    background-color: #0a2463; 
+    color: white;  
 }
 .btn-secondary i{
     font-size: 12px;
@@ -893,5 +895,6 @@ button[type="submit"]:hover {
 
 
 } /**END OF CSS SCREEN SIZE CODES**/
+
 
 
