@@ -349,7 +349,14 @@ button[type="submit"]:hover {
   font-size: 24px;
   margin: 70px 10px 0px 30px;
 } 
-  
+/**JS STYLING SWEETALERT2**/
+.swal-popup-custom {
+    border-radius: 15px !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.swal-title-custom {
+    color: #042f4b !important;
+}
     
 /**FOOTER STYLES**/
 .footer{
@@ -886,4 +893,5 @@ button[type="submit"]:hover {
 
 
 } /**END OF CSS SCREEN SIZE CODES**/
+
 
