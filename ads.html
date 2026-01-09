@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ImoDev</title>
     
@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="styles/ads.css">
     <!-- Load the PDF library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    
+    <!-- js style with sweetAlert2 library -->
+‎    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style>
 
   </style>
@@ -286,10 +287,20 @@
     const fileInput = document.getElementById('file-inputs');
     const fileName = fileInput.files.length > 0 ? fileInput.files[0].name : "No file attached";
 
-    if (!company || !email) {
-       alert("Please fill in the Company and Email fields first!");
-       return;
-    }
+    if (!company || email) {
+‎        Swal.fire({
+‎            title: 'Missing Information',
+‎            text: 'Please fill in the Company and Email fields before downloading your receipt.',
+‎            icon: 'warning',
+‎            confirmButtonColor: '#042f4b', // Matches your "Advert" button color
+‎            background: '#ffffff',
+‎            customClass: {
+‎                title: 'swal-title-custom',
+‎                popup: 'swal-popup-custom'
+‎            }
+‎        });
+‎        return;
+‎    }
 
     // 3. Branding & Styling
     doc.setFont("helvetica", "bold");
@@ -344,6 +355,18 @@
     const safeName = company.replace(/[^a-z0-9]/gi, '_');
     doc.save(`ImoDev_Receipt_${safeName}.pdf`);
 } 
+    ‎//Bottom of generatePDF()
+    ‎doc.save(`ImoDev_Receipt_${safeName}.pdf`);
+‎
+‎Swal.fire({
+‎    title: 'Success!',
+‎    text: 'Your receipt has been generated.',
+‎    icon: 'success',
+‎    timer: 3000,
+‎    showConfirmButton: false,
+‎    toast: true,
+‎    position: 'top-end'
+‎});
 </script>
 
 <script>
