@@ -359,6 +359,25 @@ button[type="submit"]:hover {
 .swal-title-custom {
     color: #042f4b !important;
 }
+
+‎    
+‎/**FREE ADS STYLES**/
+‎.countdown{
+‎    text-align: center;
+‎    background-color: #042f3b;
+‎    color: white;
+‎    padding: 15px;
+‎    border-radius: 8px;
+‎    margin: 20px auto;
+‎    max-width: 400px;
+‎    font-family: sans-serif;
+‎}
+‎#times{
+‎    font-size: 1.5rem;
+‎    font-weight: bold;
+‎    letter-spacing: 2px;
+‎}
+
     
 /**FOOTER STYLES**/
 .footer{
@@ -895,6 +914,7 @@ button[type="submit"]:hover {
 
 
 } /**END OF CSS SCREEN SIZE CODES**/
+
 
 
 
