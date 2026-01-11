@@ -365,7 +365,7 @@ button[type="submit"]:hover {
     top: -70px;
     right: 0;
     width: auto;
-    height: 320vh;
+    height: 290vh;
     overflow: hidden;
 }
 
@@ -393,7 +393,7 @@ button[type="submit"]:hover {
     transition: transform 0.6s ease;
     transition-delay: 0s;
     margin-top: -1238%;
-    height: 520vh;
+    height: 584vh;
 }
 .plan-box.active .form-box.yea{
     transform: translateX(0px);
